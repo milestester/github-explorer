@@ -1,4 +1,5 @@
 import { ElementType, HTMLAttributes, ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
 type Variant = "h1" | "h2" | "h3" | "body" | "muted" | "label";
 
@@ -26,10 +27,10 @@ interface TextProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
 }
 
-export function Text({ variant, as, children, className = "", ...props }: TextProps) {
+export function Text({ variant, as, children, className, ...props }: TextProps) {
   const Tag = as ?? defaultElements[variant];
   return (
-    <Tag className={`${variantStyles[variant]} ${className}`} {...props}>
+    <Tag className={cn(variantStyles[variant], className)} {...props}>
       {children}
     </Tag>
   );

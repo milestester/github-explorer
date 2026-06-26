@@ -34,7 +34,7 @@ export function useSearchNavigation({ initialHasSearch }: Options) {
         router.push(`?${params.toString()}`);
       });
     },
-    [searchParams, setOptimisticHasSearch, router],
+    [searchParams, setOptimisticHasSearch, router]
   );
 
   return { handleSearch, isPending, optimisticHasSearch };
