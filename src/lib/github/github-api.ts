@@ -20,7 +20,7 @@ class GitHubApi {
     let res: Response;
     try {
       res = await fetch(url, { headers: this.buildHeaders() });
-    } catch (e) {
+    } catch {
       throw new GitHubApiError("unknown", "Failed to reach GitHub API");
     }
 
