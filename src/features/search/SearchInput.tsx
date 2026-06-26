@@ -15,18 +15,19 @@ export function SearchInput({ onSearch, isPending }: SearchInputProps) {
   const searchParams = useSearchParams();
   const [value, setValue] = useState(searchParams.get("search") ?? "");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch(value.trim());
-  };
-
   const handleClear = () => {
     setValue("");
     onSearch("");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:flex-row sm:gap-2">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSearch(value.trim());
+      }}
+      className="flex flex-col gap-4 sm:flex-row sm:gap-2"
+    >
       <div className="relative w-full sm:flex-1">
         <Input
           type="text"
