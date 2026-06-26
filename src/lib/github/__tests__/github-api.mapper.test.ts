@@ -49,7 +49,7 @@ it("mapRepo maps all fields correctly", () => {
 
 it("mapRepo preserves nullable fields", () => {
   expect(
-    mapRepo({ ...baseRepoDto, description: null, language: null, updated_at: null }),
+    mapRepo({ ...baseRepoDto, description: null, language: null, updated_at: null })
   ).toMatchObject({
     description: null,
     language: null,

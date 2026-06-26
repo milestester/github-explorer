@@ -17,4 +17,3 @@ export interface GitHubRepo {
   updatedAt: string | null;
   topics: string[];
 }
-
