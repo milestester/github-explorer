@@ -1,4 +1,4 @@
-import { GitHubApiError } from "./types";
+import { GitHubApiError } from "./github-api.error";
 import type { GitHubUser, GitHubRepo } from "./types";
 import type { GitHubSearchResponseDto, GitHubRepoDto } from "./github-api.dto";
 import { mapUser, mapRepo } from "./github-api.mapper";
