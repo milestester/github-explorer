@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Brand design tokens — Forge Pastel / Material Design 3 naming.
+ *
+ * Available as:
+ *   - Tailwind utilities → bg-brand-primary, text-brand-on-surface, etc.
+ *   - CSS variables      → var(--color-brand-primary), etc.
+ *
+ * PRIMARY
+ *   brand-primary            Buttons, active links, focus rings
+ *   brand-primary-dim        Hover states on primary elements
+ *   brand-primary-container  Pastel highlight — chips, selection, focus fills
+ *
+ * SURFACE
+ *   brand-surface            Page background (off-white)
+ *   brand-surface-low        Secondary cards, input backgrounds
+ *   brand-surface-lowest     Pure white cards and modals
+ *   brand-surface-variant    Chip backgrounds, hover states on surfaces
+ *
+ * ON-SURFACE
+ *   brand-on-surface         Primary text — headings, body copy
+ *   brand-on-surface-variant Subdued text — labels, captions, placeholders
+ *
+ * OUTLINE
+ *   brand-outline            Stronger borders — focused inputs, explicit separators
+ *   brand-outline-variant    Subtle borders — card edges, dividers
+ *
+ * ERROR
+ *   brand-error              Destructive actions, validation errors
+ *   brand-error-container    Error state backgrounds
+ *   brand-on-error           Text/icons on error surfaces
+ */
+@theme {
+  --color-brand-primary: #426088;
+  --color-brand-primary-dim: #29486e;
+  --color-brand-primary-container: #b3d1ff;
+
+  --color-brand-surface: #faf9fc;
+  --color-brand-surface-low: #f4f3f7;
+  --color-brand-surface-lowest: #ffffff;
+  --color-brand-surface-variant: #e3e2e6;
+
+  --color-brand-on-surface: #1a1c1e;
+  --color-brand-on-surface-variant: #43474e;
+
+  --color-brand-outline: #73777f;
+  --color-brand-outline-variant: #c3c6cf;
+
+  --color-brand-error: #ba1a1a;
+  --color-brand-error-container: #ffdad6;
+  --color-brand-on-error: #ffffff;
+
+  --radius-brand-sm: 0.25rem;
+  --radius-brand-md: 0.75rem;
+  --radius-brand-lg: 1rem;
+  --radius-brand-xl: 1.5rem;
+  --radius-brand-full: 9999px;
+
+  --font-headline: var(--font-geist-sans);
+  --font-body: var(--font-geist-sans);
+  --font-label: var(--font-geist-sans);
+  --font-code: var(--font-geist-mono);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-brand-surface text-brand-on-surface antialiased;
+    font-family: var(--font-body);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .ambient-shadow {
+    box-shadow: 0 4px 20px rgb(0 0 0 / 0.04);
+  }
 }
