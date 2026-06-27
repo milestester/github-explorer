@@ -48,7 +48,11 @@ export function SearchInput({ onSearch, isPending }: SearchInputProps) {
           </button>
         )}
       </div>
-      <Button type="submit" className="w-full justify-center sm:w-auto" disabled={isPending}>
+      <Button
+        type="submit"
+        className="w-full justify-center sm:w-auto"
+        disabled={isPending || !value}
+      >
         <Search className="size-4" />
         Search
       </Button>
