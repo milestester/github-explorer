@@ -1,5 +1,5 @@
-import { githubApi } from "@/lib/github/github-api";
-import { GitHubApiError } from "@/lib/github/github-api.error";
+import { githubApi } from "@/lib/github/githubApi";
+import { GithubApiError } from "@/lib/github/githubApi.error";
 import { Text } from "@/components/Typography";
 import { UserCard } from "./UserCard";
 
@@ -13,7 +13,7 @@ export async function UserList({ query }: Props) {
     users = await githubApi.searchUsers(query);
   } catch (error) {
     const message =
-      error instanceof GitHubApiError && error.kind === "rate_limit"
+      error instanceof GithubApiError && error.kind === "rate_limit"
         ? "GitHub API rate limit reached. Try again in a moment."
         : "Something went wrong fetching results. Try again in a moment.";
     return <Text variant="muted">{message}</Text>;
