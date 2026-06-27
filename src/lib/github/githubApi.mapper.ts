@@ -1,5 +1,5 @@
 import type { GitHubUser, GitHubRepo } from "./types";
-import type { GitHubUserDto, GitHubRepoDto } from "./github-api.dto";
+import type { GitHubUserDto, GitHubRepoDto } from "./githubApi.dto";
 
 export function mapUser(dto: GitHubUserDto): GitHubUser {
   return {
