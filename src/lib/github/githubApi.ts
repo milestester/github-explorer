@@ -1,9 +1,9 @@
-import { GitHubApiError } from "./github-api.error";
+import { GithubApiError } from "./githubApi.error";
 import type { GitHubUser, GitHubRepo } from "./types";
-import type { GitHubSearchResponseDto, GitHubRepoDto } from "./github-api.dto";
-import { mapUser, mapRepo } from "./github-api.mapper";
+import type { GitHubSearchResponseDto, GitHubRepoDto } from "./githubApi.dto";
+import { mapUser, mapRepo } from "./githubApi.mapper";
 
-class GitHubApi {
+class GithubApi {
   private readonly BASE_URL = "https://api.github.com";
   private readonly API_VERSION = "2026-03-10";
 
@@ -21,17 +21,17 @@ class GitHubApi {
     try {
       res = await fetch(url, { headers: this.buildHeaders() });
     } catch {
-      throw new GitHubApiError("unknown", "Failed to reach GitHub API");
+      throw new GithubApiError("unknown", "Failed to reach GitHub API");
     }
 
     if (res.status === 403 || res.status === 429) {
-      throw new GitHubApiError("rate_limit", "GitHub API rate limit reached");
+      throw new GithubApiError("rate_limit", "GitHub API rate limit reached");
     }
     if (res.status === 404) {
-      throw new GitHubApiError("not_found", "Not found");
+      throw new GithubApiError("not_found", "Not found");
     }
     if (!res.ok) {
-      throw new GitHubApiError("unknown", `GitHub API error: ${res.status}`);
+      throw new GithubApiError("unknown", `GitHub API error: ${res.status}`);
     }
 
     return (await res.json()) as Promise<T>;
@@ -51,4 +51,4 @@ class GitHubApi {
   }
 }
 
-export const githubApi = new GitHubApi();
+export const githubApi = new GithubApi();

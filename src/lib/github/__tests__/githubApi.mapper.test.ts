@@ -1,5 +1,5 @@
-import { mapUser, mapRepo } from "../github-api.mapper";
-import type { GitHubUserDto, GitHubRepoDto } from "../github-api.dto";
+import { mapUser, mapRepo } from "../githubApi.mapper";
+import type { GitHubUserDto, GitHubRepoDto } from "../githubApi.dto";
 
 const baseUserDto: GitHubUserDto = {
   login: "torvalds",

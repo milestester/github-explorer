@@ -37,5 +37,10 @@ export function useSearchNavigation({ initialHasSearch }: Options) {
     [searchParams, setOptimisticHasSearch, router]
   );
 
-  return { handleSearch, isPending, optimisticHasSearch };
+  return {
+    handleSearch,
+    isPending,
+    isLoadingResults: optimisticHasSearch,
+    isShowingResults: optimisticHasSearch || initialHasSearch,
+  };
 }
