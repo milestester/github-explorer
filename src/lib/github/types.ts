@@ -1,6 +1,6 @@
 export interface GitHubUser {
-  login: string;
   id: number;
+  username: string;
   avatarUrl: string;
   htmlUrl: string;
 }

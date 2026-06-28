@@ -3,7 +3,7 @@ import type { GitHubUserDto, GitHubRepoDto } from "./githubApi.dto";
 
 export function mapUser(dto: GitHubUserDto): GitHubUser {
   return {
-    login: dto.login,
+    username: dto.login,
     id: dto.id,
     avatarUrl: dto.avatar_url,
     htmlUrl: dto.html_url,

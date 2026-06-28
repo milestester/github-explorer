@@ -3,16 +3,16 @@
 import { type ReactNode } from "react";
 import { useSearchNavigation } from "./hooks/useSearchNavigation";
 import { SearchInput } from "./SearchInput";
-import { UserListSkeleton } from "./UserListSkeleton";
 import { SearchHeader } from "./SearchHeader";
 import { cn } from "@/lib/cn";
 
 interface Props {
   children: ReactNode;
+  loadingFallback: ReactNode;
   hasSearch: boolean;
 }
 
-export function SearchContainer({ children, hasSearch }: Props) {
+export function SearchContainer({ children, loadingFallback, hasSearch }: Props) {
   const { handleSearch, isPending, isLoadingResults, isShowingResults } = useSearchNavigation({
     initialHasSearch: hasSearch,
   });
@@ -29,13 +29,7 @@ export function SearchContainer({ children, hasSearch }: Props) {
       <div
         className={cn("transition-opacity duration-200", isPending ? "opacity-0" : "opacity-100")}
       >
-        {isPending && isLoadingResults ? (
-          <div className="mt-8">
-            <UserListSkeleton />
-          </div>
-        ) : (
-          children
-        )}
+        {isLoadingResults ? <div className="mt-8">{loadingFallback}</div> : children}
       </div>
     </div>
   );
