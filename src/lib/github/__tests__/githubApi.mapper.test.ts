@@ -25,7 +25,7 @@ const baseRepoDto: GitHubRepoDto = {
 
 it("mapUser maps all fields correctly", () => {
   expect(mapUser(baseUserDto)).toEqual({
-    login: "torvalds",
+    username: "torvalds",
     id: 1,
     avatarUrl: "https://avatars.githubusercontent.com/u/1",
     htmlUrl: "https://github.com/torvalds",

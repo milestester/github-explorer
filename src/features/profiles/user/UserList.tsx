@@ -1,7 +1,7 @@
 import { githubApi } from "@/lib/github/githubApi";
 import { GithubApiError } from "@/lib/github/githubApi.error";
 import { Text } from "@/components/Typography";
-import { UserCard } from "./UserCard";
+import { UserAccordionList } from "./UserAccordionList";
 
 interface Props {
   query: string;
@@ -23,13 +23,5 @@ export async function UserList({ query }: Props) {
     return <Text variant="muted">No users found for &ldquo;{query}&rdquo;.</Text>;
   }
 
-  return (
-    <ul className="flex flex-col gap-3">
-      {users.map((user) => (
-        <li key={user.id}>
-          <UserCard user={user} />
-        </li>
-      ))}
-    </ul>
-  );
+  return <UserAccordionList users={users} />;
 }

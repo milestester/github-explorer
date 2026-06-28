@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppNav } from "@/components/AppNav";
+import { Providers } from "./providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,7 +29,9 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <AppNav />
-        <div className="mx-auto w-full max-w-200 px-6 md:px-12">{children}</div>
+        <Providers>
+          <div className="mx-auto w-full max-w-200 px-6 md:px-12">{children}</div>
+        </Providers>
       </body>
     </html>
   );

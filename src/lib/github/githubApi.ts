@@ -2,6 +2,7 @@ import { GithubApiError } from "./githubApi.error";
 import type { GitHubUser, GitHubRepo } from "./types";
 import type { GitHubSearchResponseDto, GitHubRepoDto } from "./githubApi.dto";
 import { mapUser, mapRepo } from "./githubApi.mapper";
+import { MAX_USER_RESULTS } from "@/lib/constants";
 
 class GithubApi {
   private readonly BASE_URL = "https://api.github.com";
@@ -39,13 +40,16 @@ class GithubApi {
 
   async searchUsers(query: string): Promise<GitHubUser[]> {
     if (!query.trim()) return [];
-    const url = `${this.BASE_URL}/search/users?q=${encodeURIComponent(query)}&per_page=5`;
+    const url = `${this.BASE_URL}/search/users?q=${encodeURIComponent(query)}&per_page=${MAX_USER_RESULTS}`;
     const data = await this.request<GitHubSearchResponseDto>(url);
     return data.items.map(mapUser);
   }
 
   async getUserRepos(username: string, page = 1): Promise<GitHubRepo[]> {
-    const url = `${this.BASE_URL}/users/${encodeURIComponent(username)}/repos?per_page=100&page=${page}&sort=updated`;
+    // sort=created gives stable pagination — creation dates never change so repos can't shift
+    // between pages mid-scroll. sort=updated causes duplicates when a repo is updated while
+    // the user is paginating. https://docs.github.com/en/rest/repos/repos#list-repositories-for-a-user
+    const url = `${this.BASE_URL}/users/${encodeURIComponent(username)}/repos?per_page=100&page=${page}&sort=created`;
     const data = await this.request<GitHubRepoDto[]>(url);
     return data.map(mapRepo);
   }
