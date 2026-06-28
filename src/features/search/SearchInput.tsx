@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { Search, X } from "lucide-react";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
@@ -12,15 +11,12 @@ interface SearchInputProps {
 }
 
 export function SearchInput({ onSearch, isPending }: SearchInputProps) {
-  const searchParams = useSearchParams();
-  const [value, setValue] = useState(searchParams.get("search") ?? "");
+  const [value, setValue] = useState("");
 
   const handleClear = () => {
     setValue("");
     onSearch("");
   };
-
-  const searchValueUnchanged = value.trim() === (searchParams.get("search") ?? "");
 
   return (
     <form
@@ -53,7 +49,7 @@ export function SearchInput({ onSearch, isPending }: SearchInputProps) {
       <Button
         type="submit"
         className="w-full justify-center sm:w-auto"
-        disabled={isPending || !value || searchValueUnchanged}
+        disabled={isPending || !value}
       >
         <Search className="size-4" />
         Search
