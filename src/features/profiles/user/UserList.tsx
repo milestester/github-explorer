@@ -16,7 +16,7 @@ export async function UserList({ query }: Props) {
       error instanceof GithubApiError && error.kind === "rate_limit"
         ? "GitHub API rate limit reached. Try again in a moment."
         : "Something went wrong fetching results. Try again in a moment.";
-    return <Text variant="muted">{message}</Text>;
+    return <Text variant="error">{message}</Text>;
   }
 
   if (users.length === 0) {

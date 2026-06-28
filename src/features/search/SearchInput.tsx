@@ -20,6 +20,8 @@ export function SearchInput({ onSearch, isPending }: SearchInputProps) {
     onSearch("");
   };
 
+  const searchValueUnchanged = value.trim() === (searchParams.get("search") ?? "");
+
   return (
     <form
       onSubmit={(e) => {
@@ -51,7 +53,7 @@ export function SearchInput({ onSearch, isPending }: SearchInputProps) {
       <Button
         type="submit"
         className="w-full justify-center sm:w-auto"
-        disabled={isPending || !value}
+        disabled={isPending || !value || searchValueUnchanged}
       >
         <Search className="size-4" />
         Search
