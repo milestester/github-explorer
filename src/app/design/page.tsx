@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { Input } from "@/components/Input";
@@ -216,24 +216,40 @@ export default function DesignPage() {
               Card
             </h2>
             <p className="text-brand-on-surface-variant max-w-2xl text-sm leading-relaxed">
-              Surface container for grouped content. Accepts an optional{" "}
+              Surface container for grouped content. Use{" "}
               <code className="bg-brand-surface-variant rounded px-1.5 py-0.5 text-xs">
-                className
+                variant=&quot;clickable&quot;
               </code>{" "}
-              to extend or override styles.
+              for interactive cards — adds button semantics, hover, and an optional{" "}
+              <code className="bg-brand-surface-variant rounded px-1.5 py-0.5 text-xs">icon</code>{" "}
+              slot on the right. Pass{" "}
+              <code className="bg-brand-surface-variant rounded px-1.5 py-0.5 text-xs">
+                selected
+              </code>{" "}
+              to show the active state.
             </p>
           </div>
-          <div className="flex flex-wrap gap-4">
-            <Card className="w-64">
-              <Text variant="h3">Card title</Text>
+          <div className="flex max-w-sm flex-col gap-3">
+            <Card>
+              <Text variant="h3">Default</Text>
               <Text variant="muted" className="mt-1">
-                Some supporting content inside a card.
+                Static surface container.
               </Text>
             </Card>
-            <Card className="w-64">
-              <Text variant="h3">Another card</Text>
+            <Card variant="clickable" icon={<ChevronDown size={20} />}>
+              <Text variant="h3">Clickable</Text>
               <Text variant="muted" className="mt-1">
-                Cards stack naturally in any layout.
+                Renders as a button with hover state.
+              </Text>
+            </Card>
+            <Card
+              variant="clickable"
+              selected
+              icon={<ChevronDown size={20} className="rotate-180" />}
+            >
+              <Text variant="h3">Clickable — selected</Text>
+              <Text variant="muted" className="mt-1">
+                Active/selected state.
               </Text>
             </Card>
           </div>

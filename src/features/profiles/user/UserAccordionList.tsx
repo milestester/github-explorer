@@ -17,7 +17,7 @@ export function UserAccordionList({ users }: Props) {
 
   return (
     <ul className="flex flex-col gap-3">
-      {users.map((user: GitHubUser) => (
+      {users.map((user) => (
         <li key={user.id}>
           <UserCard
             user={user}
