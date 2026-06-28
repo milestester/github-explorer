@@ -7,6 +7,9 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   prettier,
+  // Features must not import from other features.
+  // If we allow this features can become dependent on each other, and it means
+  // testing, removing or changing one feature might rely on another
   {
     files: ["src/features/**/*.ts", "src/features/**/*.tsx"],
     rules: {
