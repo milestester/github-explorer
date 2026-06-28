@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { Button } from "@/components/Button";
+import { Card } from "@/components/Card";
 import { Input } from "@/components/Input";
 import { Text } from "@/components/Typography";
 
@@ -206,6 +207,35 @@ export default function DesignPage() {
           <div className="flex max-w-sm flex-col gap-3">
             <Input placeholder="Default" />
             <Input placeholder="Disabled" disabled />
+          </div>
+        </section>
+
+        <section>
+          <div className="mb-6">
+            <h2 className="text-brand-on-surface mb-1 text-xl font-semibold tracking-tight">
+              Card
+            </h2>
+            <p className="text-brand-on-surface-variant max-w-2xl text-sm leading-relaxed">
+              Surface container for grouped content. Accepts an optional{" "}
+              <code className="bg-brand-surface-variant rounded px-1.5 py-0.5 text-xs">
+                className
+              </code>{" "}
+              to extend or override styles.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <Card className="w-64">
+              <Text variant="h3">Card title</Text>
+              <Text variant="muted" className="mt-1">
+                Some supporting content inside a card.
+              </Text>
+            </Card>
+            <Card className="w-64">
+              <Text variant="h3">Another card</Text>
+              <Text variant="muted" className="mt-1">
+                Cards stack naturally in any layout.
+              </Text>
+            </Card>
           </div>
         </section>
 
