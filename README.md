@@ -6,14 +6,14 @@ Search GitHub users and browse their public repositories.
 
 ## Stack
 
-| Layer | Tool |
-|---|---|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS v4 |
-| Data fetching | TanStack Query v5 |
-| Testing | Jest + Testing Library |
-| Linting / formatting | ESLint + Prettier |
+| Layer                | Tool                    |
+| -------------------- | ----------------------- |
+| Framework            | Next.js 16 (App Router) |
+| Language             | TypeScript              |
+| Styling              | Tailwind CSS v4         |
+| Data fetching        | TanStack Query v5       |
+| Testing              | Jest + Testing Library  |
+| Linting / formatting | ESLint + Prettier       |
 
 ---
 
@@ -75,7 +75,7 @@ Repo fetching uses Next.js Server Actions (`features/profiles/repos/actions.ts`)
 
 ### URL-driven search state
 
-The search query lives in `?search=` rather than React state. This makes results shareable and bookmarkable, and eliminates any sync between URL and UI state — the URL *is* the state.
+The search query lives in `?search=` rather than React state. This makes results shareable and bookmarkable, and eliminates any sync between URL and UI state — the URL _is_ the state.
 
 ### Component library
 

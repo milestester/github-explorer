@@ -25,7 +25,8 @@ export function useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPa
           fetchNextPage();
         }
       },
-      { root: container, rootMargin: "0px", threshold: 0.1 }
+      // Threshold means fire the observer when 10% of the element is visible
+      { root: container, threshold: 0.1 }
     );
 
     observer.observe(loadMore);
