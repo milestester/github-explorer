@@ -26,7 +26,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-**Optional:** set a GitHub personal access token to increase API rate limits from 60 to 5,000 requests/hour:
+**Optional:** set a GitHub personal access token to increase API rate limits.
 
 ```bash
 # .env.local
