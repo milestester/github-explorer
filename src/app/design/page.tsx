@@ -138,6 +138,7 @@ const typographyVariants: {
   { variant: "label", label: "label", usage: "Form labels, metadata tags, timestamps" },
 ];
 
+// Usually in production I'd make sure this page isn't visible, leaving live so it's visible for review
 export default function DesignPage() {
   return (
     <main className="py-16">
