@@ -6,14 +6,14 @@ import { searchUsers } from "../actions";
 import type { GitHubUser } from "@/lib/github/types";
 
 export function useUserSearch() {
-  const query = useSearchParams().get("search") ?? "";
+  const searchQuery = useSearchParams().get("search") ?? "";
 
   return {
-    query,
+    searchQuery,
     ...useQuery<GitHubUser[]>({
-      queryKey: ["users", query],
-      queryFn: () => searchUsers(query),
-      enabled: !!query,
+      queryKey: ["users", searchQuery],
+      queryFn: () => searchUsers(searchQuery),
+      enabled: !!searchQuery,
       staleTime: 5 * 60 * 1000,
     }),
   };

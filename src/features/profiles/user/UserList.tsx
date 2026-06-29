@@ -6,7 +6,7 @@ import { UserListSkeleton } from "./UserListSkeleton";
 import { useUserSearch } from "./hooks/useUserSearch";
 
 export function UserList() {
-  const { query, data: users, isLoading, isError } = useUserSearch();
+  const { searchQuery, data: users, isLoading, isError } = useUserSearch();
 
   if (isLoading) {
     return <UserListSkeleton />;
@@ -17,7 +17,7 @@ export function UserList() {
   }
 
   if (!users?.length) {
-    return <Text variant="muted">No users found for &ldquo;{query}&rdquo;.</Text>;
+    return <Text variant="muted">No users found for &ldquo;{searchQuery}&rdquo;.</Text>;
   }
 
   return (

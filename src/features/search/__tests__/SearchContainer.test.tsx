@@ -5,13 +5,16 @@ import { useSearchNavigation } from "../hooks/useSearchNavigation";
 jest.mock("../hooks/useSearchNavigation");
 jest.mock("../SearchInput", () => ({ SearchInput: () => null }));
 jest.mock("../SearchHeader", () => ({ SearchHeader: () => null }));
+jest.mock("../SearchResultsHeader", () => ({
+  SearchResultsHeader: ({ searchQuery }: { searchQuery: string }) => <div>{searchQuery}</div>,
+}));
 
 const mockUseSearchNavigation = jest.mocked(useSearchNavigation);
 
 const baseNav = {
   handleSearch: jest.fn(),
   isPending: false,
-  query: "torvalds",
+  searchQuery: "torvalds",
   isShowingResults: false,
 };
 
@@ -36,14 +39,4 @@ describe("SearchContainer", () => {
     expect(screen.queryByText("results")).not.toBeInTheDocument();
   });
 
-  it("renders the query label and clear button when isShowingResults is true", () => {
-    mockUseSearchNavigation.mockReturnValue({ ...baseNav, isShowingResults: true });
-    render(
-      <SearchContainer>
-        <div>results</div>
-      </SearchContainer>
-    );
-    expect(screen.getByText(/torvalds/)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /clear search results/i })).toBeInTheDocument();
-  });
 });

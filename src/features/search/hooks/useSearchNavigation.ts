@@ -7,16 +7,15 @@ export function useSearchNavigation() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const query = searchParams.get("search") ?? "";
+  const searchQuery = searchParams.get("search") ?? "";
 
-  const handleSearch = (query: string) => {
+  const handleSearch = (searchQuery: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (query) {
-      params.set("search", query);
+    if (searchQuery) {
+      params.set("search", searchQuery);
     } else {
       params.delete("search");
     }
-    // TODO: think about useOptimistic removal
     startTransition(() => {
       router.push(`?${params.toString()}`);
     });
@@ -25,7 +24,7 @@ export function useSearchNavigation() {
   return {
     handleSearch,
     isPending,
-    query,
-    isShowingResults: !!query,
+    searchQuery,
+    isShowingResults: !!searchQuery,
   };
 }

@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function SearchContainer({ children }: Props) {
-  const { handleSearch, isPending, query, isShowingResults } = useSearchNavigation();
+  const { handleSearch, isPending, searchQuery, isShowingResults } = useSearchNavigation();
 
   return (
     <div
@@ -28,7 +28,7 @@ export function SearchContainer({ children }: Props) {
       >
         {isShowingResults && (
           <div className="mt-8">
-            <SearchResultsHeader query={query} onClear={() => handleSearch("")} />
+            <SearchResultsHeader searchQuery={searchQuery} onClear={() => handleSearch("")} />
             {children}
           </div>
         )}
