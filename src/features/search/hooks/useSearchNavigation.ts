@@ -1,17 +1,13 @@
 "use client";
 
-import { useOptimistic, useTransition } from "react";
+import { useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-interface Options {
-  initialHasSearch: boolean;
-}
-
-export function useSearchNavigation({ initialHasSearch }: Options) {
+export function useSearchNavigation() {
   const [isPending, startTransition] = useTransition();
-  const [optimisticHasSearch, setOptimisticHasSearch] = useOptimistic(initialHasSearch);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const query = searchParams.get("search") ?? "";
 
   const handleSearch = (query: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -20,16 +16,8 @@ export function useSearchNavigation({ initialHasSearch }: Options) {
     } else {
       params.delete("search");
     }
-    // startTransition marks the navigation as non-urgent so the UI stays
-    // interactive while the RSC payload is fetched. isPending is true for
-    // the duration, giving us a signal to show the skeleton.
-    // setOptimisticHasSearch must be inside the same transition so React
-    // knows to hold the optimistic value until the navigation settles —
-    // it auto-reverts to the real hasSearch if the navigation fails.
-    // When we clear the query, the optimistic value is emptied, and we don't
-    // show the skeleton.
+    // TODO: think about useOptimistic removal
     startTransition(() => {
-      setOptimisticHasSearch(!!query);
       router.push(`?${params.toString()}`);
     });
   };
@@ -37,7 +25,7 @@ export function useSearchNavigation({ initialHasSearch }: Options) {
   return {
     handleSearch,
     isPending,
-    isLoadingResults: isPending && optimisticHasSearch,
-    isShowingResults: optimisticHasSearch || initialHasSearch,
+    query,
+    isShowingResults: !!query,
   };
 }

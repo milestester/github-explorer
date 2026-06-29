@@ -16,7 +16,7 @@ beforeEach(() => {
 
 describe("useSearchNavigation", () => {
   it("pushes search param when query is provided", () => {
-    const { result } = renderHook(() => useSearchNavigation({ initialHasSearch: false }));
+    const { result } = renderHook(() => useSearchNavigation());
 
     act(() => {
       result.current.handleSearch("torvalds");
@@ -26,7 +26,7 @@ describe("useSearchNavigation", () => {
   });
 
   it("removes search param when query is cleared", () => {
-    const { result } = renderHook(() => useSearchNavigation({ initialHasSearch: true }));
+    const { result } = renderHook(() => useSearchNavigation());
 
     act(() => {
       result.current.handleSearch("");
@@ -38,7 +38,7 @@ describe("useSearchNavigation", () => {
   it("preserves existing params when searching", () => {
     mockUseSearchParams.mockReturnValue(new URLSearchParams("user=torvalds"));
 
-    const { result } = renderHook(() => useSearchNavigation({ initialHasSearch: false }));
+    const { result } = renderHook(() => useSearchNavigation());
 
     act(() => {
       result.current.handleSearch("octocat");
@@ -50,7 +50,7 @@ describe("useSearchNavigation", () => {
   it("preserves existing params when clearing", () => {
     mockUseSearchParams.mockReturnValue(new URLSearchParams("user=torvalds&search=octocat"));
 
-    const { result } = renderHook(() => useSearchNavigation({ initialHasSearch: true }));
+    const { result } = renderHook(() => useSearchNavigation());
 
     act(() => {
       result.current.handleSearch("");
