@@ -7,9 +7,11 @@ import {
 } from "@tanstack/react-query";
 import { fetchUserRepos, type ReposPage } from "../actions";
 import type { GitHubRepo } from "@/lib/github/types";
+import { GITHUB_ERROR_MESSAGES } from "@/lib/github/githubApi.error";
 
 export type UserReposResult = UseInfiniteQueryResult<InfiniteData<ReposPage, number>, Error> & {
   repos: GitHubRepo[];
+  isRateLimit: boolean;
 };
 
 export function useUserRepos(username: string): UserReposResult {
@@ -26,5 +28,6 @@ export function useUserRepos(username: string): UserReposResult {
   return {
     ...result,
     repos: result.data?.pages.flatMap((page) => page.repos) ?? [],
+    isRateLimit: result.error?.message === GITHUB_ERROR_MESSAGES.rate_limit,
   } as UserReposResult;
 }
