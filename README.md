@@ -109,6 +109,12 @@ A live reference is available at [/design](http://localhost:3000/design) — col
 
 ---
 
+## Deployment
+
+Live at [github-explorer-milestesters-projects.vercel.app](https://github-explorer-milestesters-projects.vercel.app). Hosted on [Vercel](https://vercel.com) via Git integration. Every push to `main` triggers a production deployment automatically. Every other branch gets a preview deployment with a unique URL.
+
+---
+
 ## CI pipeline
 
 GitHub Actions runs on every pull request to `main`.
