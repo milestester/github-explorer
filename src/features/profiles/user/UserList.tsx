@@ -1,27 +1,33 @@
-import { githubApi } from "@/lib/github/githubApi";
-import { GithubApiError } from "@/lib/github/githubApi.error";
+"use client";
+
 import { Text } from "@/components/Typography";
 import { UserAccordionList } from "./UserAccordionList";
+import { UserListSkeleton } from "./UserListSkeleton";
+import { useUserSearch } from "./hooks/useUserSearch";
 
-interface Props {
-  query: string;
-}
+export function UserList() {
+  const { searchQuery, data: users, isLoading, isError } = useUserSearch();
 
-export async function UserList({ query }: Props) {
-  let users;
-  try {
-    users = await githubApi.searchUsers(query);
-  } catch (error) {
-    const message =
-      error instanceof GithubApiError && error.kind === "rate_limit"
-        ? "GitHub API rate limit reached. Try again in a moment."
-        : "Something went wrong fetching results. Try again in a moment.";
-    return <Text variant="muted">{message}</Text>;
+  if (isLoading) {
+    return <UserListSkeleton />;
   }
 
-  if (users.length === 0) {
-    return <Text variant="muted">No users found for &ldquo;{query}&rdquo;.</Text>;
+  if (isError && !users?.length) {
+    return <Text variant="error">Something went wrong. Try again in a moment.</Text>;
   }
 
-  return <UserAccordionList users={users} />;
+  if (!users?.length) {
+    return <Text variant="muted">No users found for &ldquo;{searchQuery}&rdquo;.</Text>;
+  }
+
+  return (
+    <>
+      {isError && (
+        <Text variant="error" className="mb-3">
+          Something went wrong. Showing cached results.
+        </Text>
+      )}
+      <UserAccordionList users={users} />
+    </>
+  );
 }

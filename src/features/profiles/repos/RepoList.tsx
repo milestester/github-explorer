@@ -25,8 +25,8 @@ export function RepoList({ username }: Props) {
     return <RepoListSkeleton />;
   }
 
-  if (isError) {
-    return <Text variant="muted">Failed to load repositories. Try again in a moment.</Text>;
+  if (isError && repos.length === 0) {
+    return <Text variant="error">Failed to load repositories. Try again in a moment.</Text>;
   }
 
   if (repos.length === 0) {
@@ -37,6 +37,11 @@ export function RepoList({ username }: Props) {
 
   return (
     <div ref={scrollContainerRef} className="h-64 overflow-y-auto">
+      {isError && (
+        <Text variant="error" className="mb-3">
+          Failed to load more repositories. Showing cached results.
+        </Text>
+      )}
       <ul className="flex flex-col gap-3 pb-4">
         {repos.map((repo) => (
           <li key={repo.id}>

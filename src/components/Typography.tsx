@@ -1,7 +1,7 @@
 import { ElementType, HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "h1" | "h2" | "h3" | "body" | "muted" | "label";
+type Variant = "h1" | "h2" | "h3" | "body" | "muted" | "label" | "error";
 
 const variantStyles: Record<Variant, string> = {
   h1: "text-2xl font-semibold tracking-tight text-brand-on-surface",
@@ -10,6 +10,7 @@ const variantStyles: Record<Variant, string> = {
   body: "text-sm text-brand-on-surface",
   muted: "text-sm text-brand-on-surface-variant",
   label: "text-xs font-medium text-brand-on-surface-variant",
+  error: "text-sm text-brand-error",
 };
 
 const defaultElements: Record<Variant, ElementType> = {
@@ -19,6 +20,7 @@ const defaultElements: Record<Variant, ElementType> = {
   body: "p",
   muted: "p",
   label: "span",
+  error: "p",
 };
 
 interface TextProps extends HTMLAttributes<HTMLElement> {
