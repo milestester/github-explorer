@@ -12,8 +12,9 @@ interface Props {
 }
 
 export function RepoList({ username }: Props) {
-  const { repos, isLoading, isError, isFetchingNextPage, hasNextPage, fetchNextPage } =
+  const { repos, isLoading, isError, isRateLimit, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useUserRepos(username);
+  const base = isRateLimit ? "GitHub rate limit reached" : "Failed to load repositories";
 
   const { scrollContainerRef, loadMoreRef } = useInfiniteScroll({
     hasNextPage,
@@ -26,7 +27,7 @@ export function RepoList({ username }: Props) {
   }
 
   if (isError && repos.length === 0) {
-    return <Text variant="error">Failed to load repositories. Try again in a moment.</Text>;
+    return <Text variant="error">{`${base}. Try again in a moment.`}</Text>;
   }
 
   if (repos.length === 0) {
@@ -39,7 +40,7 @@ export function RepoList({ username }: Props) {
     <div ref={scrollContainerRef} className="h-64 overflow-y-auto">
       {isError && (
         <Text variant="error" className="mb-3">
-          Failed to load more repositories. Showing cached results.
+          {`${base}. Showing cached results.`}
         </Text>
       )}
       <ul className="flex flex-col gap-3 pb-4">

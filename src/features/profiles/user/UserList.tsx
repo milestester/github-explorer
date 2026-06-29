@@ -6,14 +6,15 @@ import { UserListSkeleton } from "./UserListSkeleton";
 import { useUserSearch } from "./hooks/useUserSearch";
 
 export function UserList() {
-  const { searchQuery, data: users, isLoading, isError } = useUserSearch();
+  const { searchQuery, data: users, isLoading, isError, isRateLimit } = useUserSearch();
+  const base = isRateLimit ? "GitHub rate limit reached" : "Something went wrong";
 
   if (isLoading) {
     return <UserListSkeleton />;
   }
 
   if (isError && !users?.length) {
-    return <Text variant="error">Something went wrong. Try again in a moment.</Text>;
+    return <Text variant="error">{`${base}. Try again in a moment.`}</Text>;
   }
 
   if (!users?.length) {
@@ -24,7 +25,7 @@ export function UserList() {
     <>
       {isError && (
         <Text variant="error" className="mb-3">
-          Something went wrong. Showing cached results.
+          {`${base}. Showing cached results.`}
         </Text>
       )}
       <UserAccordionList users={users} />

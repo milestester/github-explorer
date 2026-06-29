@@ -1,6 +1,6 @@
 import { fetchUserRepos } from "../actions";
 import { githubApi } from "@/lib/github/githubApi";
-import { GithubApiError } from "@/lib/github/githubApi.error";
+import { GithubApiError, GITHUB_ERROR_MESSAGES } from "@/lib/github/githubApi.error";
 
 jest.mock("@/lib/github/githubApi", () => ({
   githubApi: { getUserRepos: jest.fn() },
@@ -42,7 +42,9 @@ describe("fetchUserRepos", () => {
   });
 
   it("propagates GithubApiError without swallowing it", async () => {
-    mockGetUserRepos.mockRejectedValue(new GithubApiError("rate_limit", "Rate limited"));
+    mockGetUserRepos.mockRejectedValue(
+      new GithubApiError("rate_limit", GITHUB_ERROR_MESSAGES.rate_limit)
+    );
     await expect(fetchUserRepos("torvalds", 1)).rejects.toBeInstanceOf(GithubApiError);
   });
 });

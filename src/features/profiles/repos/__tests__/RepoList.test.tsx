@@ -12,6 +12,7 @@ function mockQuery(overrides: Partial<UserReposResult>): UserReposResult {
     repos: [],
     isLoading: false,
     isError: false,
+    isRateLimit: false,
     isFetchingNextPage: false,
     hasNextPage: false,
     fetchNextPage: jest.fn(),
@@ -60,6 +61,18 @@ describe("RepoList", () => {
     mockUseUserRepos.mockReturnValue(mockQuery({ isError: true }));
     render(<RepoList username="torvalds" />);
     expect(screen.getByText(/failed to load repositories/i)).toBeInTheDocument();
+  });
+
+  it("shows rate limit message when rate limited", () => {
+    mockUseUserRepos.mockReturnValue(mockQuery({ isError: true, isRateLimit: true }));
+    render(<RepoList username="torvalds" />);
+    expect(screen.getByText(/github rate limit reached/i)).toBeInTheDocument();
+  });
+
+  it("shows cached results message on partial error", () => {
+    mockUseUserRepos.mockReturnValue(mockQuery({ isError: true, repos: [mockRepo(1)] }));
+    render(<RepoList username="torvalds" />);
+    expect(screen.getByText(/showing cached results/i)).toBeInTheDocument();
   });
 
   it("shows empty state when no repos", () => {
