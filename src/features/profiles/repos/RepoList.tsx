@@ -47,9 +47,11 @@ export function RepoList({ username }: Props) {
         {repos.map((repo) => (
           <li key={repo.id}>
             <Card>
-              <Text variant="h3" as="span" className="block truncate">
-                {repo.name}
-              </Text>
+              <a href={repo.htmlUrl} target="_blank" rel="noopener noreferrer">
+                <Text variant="h3" as="span" className="block truncate hover:underline">
+                  {repo.name}
+                </Text>
+              </a>
               {repo.description && (
                 <Text variant="muted" className="mt-1 line-clamp-2">
                   {repo.description}

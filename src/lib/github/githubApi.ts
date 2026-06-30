@@ -39,7 +39,9 @@ class GithubApi {
   }
 
   async searchUsers(query: string): Promise<GitHubUser[]> {
-    if (!query.trim()) return [];
+    if (!query.trim()) {
+      return [];
+    }
     const url = `${this.BASE_URL}/search/users?q=${encodeURIComponent(query)}&per_page=${MAX_USER_RESULTS}`;
     const data = await this.request<GitHubSearchResponseDto>(url);
     return data.items.map(mapUser);

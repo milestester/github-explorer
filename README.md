@@ -77,6 +77,8 @@ Repo fetching uses Next.js Server Actions (`features/profiles/repos/actions.ts`)
 
 The search query lives in `?search=` rather than React state. This makes results shareable and bookmarkable, and eliminates any sync between URL and UI state — the URL _is_ the state.
 
+This also removes the need for prop drilling or a global state store. Any component that needs the search query can read it independently and reactively via `useSearchParams()`, subscribing to URL changes without any shared context or lifted state.
+
 ### Component library
 
 A small component library (`Button`, `Input`, `Card`, `Text`, `Skeleton`) was built from the start. The initial setup takes longer, but pays off quickly: new features can be built faster using consistent, already-styled primitives, the design token system enforces a uniform theme throughout, and there's a clear path to extend the library as the app grows. It also improves readability — component names in JSX communicate intent without needing to decode a configuration of utility classes.
@@ -112,6 +114,18 @@ A live reference is available at [/design](http://localhost:3000/design) — col
 ## Deployment
 
 Live at [github-explorer-milestesters-projects.vercel.app](https://github-explorer-nu-three.vercel.app). Hosted on [Vercel](https://vercel.com) via Git integration. Every push to `main` triggers a production deployment automatically. Every other branch gets a preview deployment with a unique URL.
+
+---
+
+## Tests
+
+The suite covers the logic that's actually worth testing: the GitHub API client (HTTP status handling, error mapping), the DTO mappers, the accordion interaction, error and loading states in the UI, and the infinite scroll hook. Framework behaviour with React Query configuration, Next.js routing is left untested on the basis that well-maintained libraries don't need to be verified.
+
+The goal was a minimal suite where every test earns its place, rather than broad coverage for its own sake.
+
+```bash
+yarn test
+```
 
 ---
 
