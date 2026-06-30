@@ -113,7 +113,7 @@ A live reference is available at [/design](http://localhost:3000/design) — col
 
 ## Deployment
 
-Live at [github-explorer-milestesters-projects.vercel.app](https://github-explorer-nu-three.vercel.app). Hosted on [Vercel](https://vercel.com) via Git integration. Every push to `main` triggers a production deployment automatically. Every other branch gets a preview deployment with a unique URL.
+Live at [https://github-explorer-nu-three.vercel.app](https://github-explorer-nu-three.vercel.app). Hosted on [Vercel](https://vercel.com) via Git integration. Every push to `main` triggers a production deployment automatically. Every other branch gets a preview deployment with a unique URL.
 
 ---
 
@@ -126,6 +126,12 @@ The goal was a minimal suite where every test earns its place, rather than broad
 ```bash
 yarn test
 ```
+
+---
+
+## Dependency security
+
+Dependabot is enabled to keep dependencies up to date and flag vulnerabilities automatically. Any security advisories raised against production dependencies are resolved before merging.
 
 ---
 
