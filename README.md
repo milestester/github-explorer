@@ -129,6 +129,12 @@ yarn test
 
 ---
 
+## Dependency security
+
+Dependabot is enabled to keep dependencies up to date and flag vulnerabilities automatically. Any security advisories raised against production dependencies are resolved before merging.
+
+---
+
 ## CI pipeline
 
 GitHub Actions runs on every pull request to `main`.
