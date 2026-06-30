@@ -18,6 +18,7 @@ export function Card({ variant = "default", icon, selected, className, children,
     return (
       <button
         onClick={onClick}
+        aria-expanded={selected}
         className={cn(
           base,
           "flex w-full cursor-pointer items-center gap-4 transition-colors",
