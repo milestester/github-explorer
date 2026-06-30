@@ -107,7 +107,7 @@ Components follow [Material Design 3](https://m3.material.io/) colour token conv
 
 Primitive components: `Button`, `Input`, `Card` (static + clickable variants), `Text`, `Skeleton`.
 
-A live reference is available at [/design](http://localhost:3000/design) — colour swatches, typography scale, and all component variants in one place.
+A live reference is available at [/design](https://github-explorer-nu-three.vercel.app/design) — colour swatches, typography scale, and all component variants in one place.
 
 ---
 
